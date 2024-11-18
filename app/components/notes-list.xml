@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+  <ActionBar title="Study Notes">
+    <ActionItem tap="{{ onAddNote }}" ios.position="right" android.position="actionBar">
+      <Label text="+" class="action-item" />
+    </ActionItem>
+  </ActionBar>
+
+  <GridLayout rows="auto, *">
+    <SearchBar row="0" hint="Search notes..." text="{{ searchQuery }}" 
+               submit="{{ onSearch }}" clear="{{ onClearSearch }}" />
+    
+    <ListView row="1" items="{{ notes }}" itemTap="{{ onNoteTap }}">
+      <ListView.itemTemplate>
+        <GridLayout columns="*, auto" class="p-2">
+          <StackLayout col="0">
+            <Label text="{{ title }}" class="text-lg font-bold" />
+            <Label text="{{ subject }}" class="text-sm text-gray-500" />
+          </StackLayout>
+          <Label col="1" text="★" class="text-xl" 
+                 visibility="{{ bookmarked ? 'visible' : 'collapsed' }}" />
+        </GridLayout>
+      </ListView.itemTemplate>
+    </ListView>
+  </GridLayout>
+</Page>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+  <ActionBar title="Study Note Editor">
+    <ActionItem tap="{{ onSave }}" ios.position="right" android.position="actionBar">
+      <Label text="Save" class="action-item" />
+    </ActionItem>
+  </ActionBar>
+
+  <ScrollView>
+    <StackLayout class="p-4">
+      <TextField hint="Title" text="{{ note.title }}" class="input mb-4 text-lg" />
+      
+      <TextField hint="Subject" text="{{ note.subject }}" class="input mb-4" />
+      
+      <Button text="Generate with Gemini" tap="{{ onGenerateContent }}" 
+              class="btn btn-primary mb-4" />
+      
+      <ActivityIndicator busy="{{ isGenerating }}" />
+      
+      <TextView hint="Enter your study content here..." 
+                text="{{ note.content }}" 
+                height="300" 
+                class="input p-2" />
+      
+      <ListView items="{{ generatedImages }}" height="200" class="mt-4">
+        <ListView.itemTemplate>
+          <Image src="{{ imageUrl }}" stretch="aspectFit" height="150" />
+        </ListView.itemTemplate>
+      </ListView>
+      
+      <GridLayout rows="auto" columns="*, *" class="mt-4">
+        <Button text="Export Text" tap="{{ onExportText }}" class="btn btn-primary" col="0" />
+        <Button text="Export Markdown" tap="{{ onExportMarkdown }}" class="btn btn-secondary" col="1" />
+      </GridLayout>
+    </StackLayout>
+  </ScrollView>
+</Page>
